@@ -18,7 +18,7 @@ public class User {
     @NotNull
     @Getter
     @Setter
-    private String firstname;
+    private String name;
 
     @Getter
     @Setter
@@ -27,5 +27,10 @@ public class User {
     public User() {
     }
 
+    public User(String email, String name,  String password) {
+        this.email = email;
+        this.name = name;
+        this.password = password;
+    }
 
 }
