@@ -38,6 +38,8 @@
 			<scope>test</scope>
 		</dependency>
 
+
+
 		<!-- Java Persistence API + H2 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -65,6 +67,26 @@
 			<artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
 			<version>0.11.2</version>
 			<scope>runtime</scope>
+		</dependency>
+
+
+		<!---  Spring security  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-data</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-jwt</artifactId>
+			<version>1.1.1.RELEASE</version>
 		</dependency>
 
 	</dependencies>
