@@ -3,6 +3,7 @@ package no.ntnu.backend.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import no.ntnu.backend.dto.UserDTO;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,6 +32,12 @@ public class User {
         this.email = email;
         this.name = name;
         this.password = password;
+    }
+
+    public User(UserDTO data) {
+        this.email = data.getEmail();
+        this.name = data.getName();
+        this.password = data.getPassword();
     }
 
 }
