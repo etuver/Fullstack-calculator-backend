@@ -17,15 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class JwtAuthFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtProvider jwtProvider;
-    private  final UserDetailsService userDetailsService;
-
+    private final JwtProvider tokenProvider;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public JwtAuthFilter(JwtProvider jwtProvider, UserDetailsService userDetailsService){
-        this.jwtProvider = jwtProvider;
+    public JwtAuthenticationFilter(JwtProvider tokenProvider, UserDetailsService userDetailsService) {
+        this.tokenProvider = tokenProvider;
         this.userDetailsService = userDetailsService;
     }
 
@@ -45,10 +44,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String token = getTokenFromRequest(request);
 
         if (token != null){
-            if (!jwtProvider.validateToken(token)){
+            if (!tokenProvider.validateToken(token)){
                 throw new IllegalAccessException("Invalid token");
             }
-            String username = jwtProvider.getUsername(token);
+            String username = tokenProvider.getUsername(token);
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

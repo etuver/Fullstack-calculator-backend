@@ -10,21 +10,28 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorizationService {
-
-    private final AuthenticationManager authenticationManager;
-    private final JwtProvider jwtProvider;
+    @Autowired
+    private final AuthenticationManager authManager;
+    private final JwtProvider tokenProvider;
 
     @Autowired
-    public AuthorizationService(AuthenticationManager authenticationManager, JwtProvider jwtProvider ) {
-        this.authenticationManager = authenticationManager;
-        this.jwtProvider = jwtProvider;
+    public AuthorizationService(AuthenticationManager authManager, JwtProvider tokenProvider) {
+        this.authManager = authManager;
+        this.tokenProvider = tokenProvider;
     }
 
-
+    /**
+     * Gets a token from given credentials.
+     *
+     * @param token
+     *            Credentials.
+     *
+     * @return JWT.
+     */
     public String getTokenFromCredentials(UsernamePasswordAuthenticationToken token) {
-        Authentication auth = authenticationManager.authenticate(token);
+        Authentication auth = authManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        return jwtProvider.generateToken(auth);
+        return tokenProvider.generateToken(auth);
     }
 }
