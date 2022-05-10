@@ -23,7 +23,7 @@ public class UserService {
      * @return The user
      */
     public User saveUser(User user){
-        user.setPassword(user.getPassword());
+        System.out.println("Saved user");
         return userRepository.save(user);
     }
 
