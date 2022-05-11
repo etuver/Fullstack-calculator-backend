@@ -43,6 +43,11 @@ public class Expression {
         this.expression = expression.getExpression();
     }
 
+    public Expression(User user, String expression){
+        this.user = user;
+        this.expression = expression;
+    }
+
 
 
 
