@@ -1,5 +1,6 @@
 package no.ntnu.backend.service;
 
+import net.bytebuddy.implementation.bytecode.Throw;
 import no.ntnu.backend.dto.MessageDTO;
 import no.ntnu.backend.entity.Expression;
 import no.ntnu.backend.entity.User;
@@ -25,21 +26,16 @@ public class CalculatorService {
         this.userRepository = userRepository;
     }
 
-    public Optional<Expression> calculate(String expression, String userEmail) {
-        Optional<User> user = userRepository.findById(userEmail);
-        if (user.isEmpty()) {
-            return Optional.empty();
-        }
-
+    public String calculate(String expression) {
+        String result = "";
         try {
-            String result = getResult(expression);
-            String finalExp = expression += result;
-            Expression finalExpression = new Expression(userEmail, finalExp);
-            return Optional.of(expressionRepository.save(finalExpression));
+            result = getResult(expression);
+            //String finalExp = expression += result;
         } catch (Exception e) {
+            result = "NaN";
             System.out.println(e.getMessage());
-            return Optional.empty();
         }
+        return result;
     }
 
 
@@ -125,3 +121,28 @@ public class CalculatorService {
 
 
 }
+
+
+    /**
+     *
+     * @param expression
+     * @param userEmail
+     * @return
+
+    public Optional<Expression> calculate(String expression, String userEmail) {
+        Optional<User> user = userRepository.findById(userEmail);
+        if (user.isEmpty()) {
+            return Optional.empty();
+        }
+
+        try {
+            String result = getResult(expression);
+            String finalExp = expression += result;
+            Expression finalExpression = new Expression(userEmail, finalExp);
+            return Optional.of(expressionRepository.save(finalExpression));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return Optional.empty();
+        }
+    }
+     */
