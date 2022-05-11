@@ -46,9 +46,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (token != null){
             if (!tokenProvider.validateToken(token)){
+                System.out.println("invalid token");
                 throw new IllegalAccessException("Invalid token");
             }
-            System.out.println("er det her ?");
+            System.out.println("er det her ?2");
             String username = tokenProvider.getUsername(token);
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -78,7 +79,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         return bearer.substring(7); //Remove PREFIX
 
     }
-
 
 
 

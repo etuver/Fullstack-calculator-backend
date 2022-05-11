@@ -1,5 +1,6 @@
 package no.ntnu.backend.service;
 
+
 import no.ntnu.backend.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -7,6 +8,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+
 
 @Service
 public class AuthorizationService {
@@ -29,7 +32,7 @@ public class AuthorizationService {
      * @return JWT.
      */
     public String getTokenFromCredentials(UsernamePasswordAuthenticationToken token) {
-
+        System.out.println("token in service: " + token);
         Authentication auth = authManager.authenticate(token); //this one failing
         System.out.println("kom hit da");
         SecurityContextHolder.getContext().setAuthentication(auth);

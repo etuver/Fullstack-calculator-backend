@@ -50,9 +50,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().cors().configurationSource(request -> corsConfiguration()).and().csrf().disable()
                 .authorizeRequests().antMatchers("/h2/**", // Allow access to H2 database admin panel.
                         "/auth/**", // Allow access to authentication endpoint.'
-                        "/auth/**" // Allow access to authentication endpoint.
+                        "/user/**", //Allow acces to user endpoint.
+                        "/**" // Allow more access
                 ).permitAll().antMatchers(HttpMethod.POST, "/user/**").permitAll()
-                .antMatchers(HttpMethod.GET,  "/exo/**").permitAll().anyRequest().authenticated().and()
+                .antMatchers(HttpMethod.GET,  "/exp/**").permitAll().anyRequest().authenticated().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
@@ -93,3 +94,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 }
+
