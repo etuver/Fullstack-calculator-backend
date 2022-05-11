@@ -53,13 +53,11 @@ public class AuthorizationController {
     public ResponseEntity<Object> getTokenFromCredentials(@RequestBody AuthorizationDTO data) throws Exception{
         String username = data.getEmail();
         String password = data.getPassword();
-        System.out.println("Here" + username + password);
 
         Optional<User> optionalUser = userRepository.findById(username);
 
         if (optionalUser.isPresent()){
             String token = generateToken(username);
-            System.out.println( "token in controller: "+token);
                 return ResponseEntity.ok(new TokenDTO(token));
             }
 

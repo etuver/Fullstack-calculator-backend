@@ -30,7 +30,6 @@ public class JwtProvider {
      */
     public String generateToken(Authentication authentication){
         Key key = Keys.hmacShaKeyFor(TOKEN_KEY.getBytes());
-        System.out.println("kom hit?");
         UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
 
         Date current = new Date();
