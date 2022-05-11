@@ -42,11 +42,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         try {
         String token = getTokenFromRequest(request);
+            System.out.println("er det her ?");
 
         if (token != null){
             if (!tokenProvider.validateToken(token)){
                 throw new IllegalAccessException("Invalid token");
             }
+            System.out.println("er det her ?");
             String username = tokenProvider.getUsername(token);
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

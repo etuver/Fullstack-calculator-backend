@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorizationService {
-    @Autowired
+
     private final AuthenticationManager authManager;
     private final JwtProvider tokenProvider;
 
@@ -29,7 +29,9 @@ public class AuthorizationService {
      * @return JWT.
      */
     public String getTokenFromCredentials(UsernamePasswordAuthenticationToken token) {
-        Authentication auth = authManager.authenticate(token);
+
+        Authentication auth = authManager.authenticate(token); //this one failing
+        System.out.println("kom hit da");
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         return tokenProvider.generateToken(auth);

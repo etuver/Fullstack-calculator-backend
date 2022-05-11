@@ -29,7 +29,8 @@ public class JwtProvider {
      * @return The token
      */
     public String generateToken(Authentication authentication){
-        Key key = Keys.hmacShaKeyFor(TOKEN_KEY.getBytes(StandardCharsets.UTF_8));
+        Key key = Keys.hmacShaKeyFor(TOKEN_KEY.getBytes());
+        System.out.println("kom hit?");
         UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
 
         Date current = new Date();

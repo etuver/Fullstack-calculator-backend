@@ -37,8 +37,11 @@ public class AuthorizationController {
      */
     @PostMapping
     public ResponseEntity<Object> getTokenFromCredentials(@Valid @RequestBody AuthorizationDTO data){
-        UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(data.getUsername(), data.getPassword());
+        UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getPassword());
+        System.out.println("data.email: " + data.getEmail() + ", passord: "+ data.getPassword());
+        System.out.println(credentials);
         String token = authorizationService.getTokenFromCredentials(credentials);
+        System.out.println(token);
 
         return ResponseEntity.ok(new TokenDTO(token));
 

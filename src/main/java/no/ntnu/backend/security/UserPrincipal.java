@@ -11,7 +11,7 @@ import java.util.List;
 public class UserPrincipal implements UserDetails {
 
     private Collection<GrantedAuthority> authorities;
-    private String username;
+    private String email;
     private String password;
 
 
@@ -23,7 +23,7 @@ public class UserPrincipal implements UserDetails {
     public static UserPrincipal of(User user){
         UserPrincipal userPrincipal = new UserPrincipal();
 
-        userPrincipal.username = user.getEmail();
+        userPrincipal.email = user.getEmail();
         userPrincipal.password = user.getPassword();
         return userPrincipal;
     }
@@ -36,9 +36,9 @@ public class UserPrincipal implements UserDetails {
 
     }
 
-    public UserPrincipal(Collection<GrantedAuthority> authorities, String username, String password) {
+    public UserPrincipal(Collection<GrantedAuthority> authorities, String email, String password) {
         this.authorities = authorities;
-        this.username = username;
+        this.email = email;
         this.password = password;
     }
 
@@ -56,7 +56,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override

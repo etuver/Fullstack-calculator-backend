@@ -3,9 +3,7 @@ package no.ntnu.backend.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Expression {
@@ -23,6 +21,13 @@ public class Expression {
     @Getter
     @Setter
     private String expression;
+
+
+    @ManyToOne
+    @JoinColumn(name = "email" )
+    @Getter
+    @Setter
+    private User user;
 
     public Expression() {
     }

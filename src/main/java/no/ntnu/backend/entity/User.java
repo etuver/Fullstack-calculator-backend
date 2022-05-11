@@ -15,12 +15,6 @@ public class User {
     @Id
     @Getter
     private String email;
-
-    @NotNull
-    @Getter
-    @Setter
-    private String name;
-
     @Getter
     @Setter
     private String password;
@@ -28,15 +22,13 @@ public class User {
     public User() {
     }
 
-    public User(String email, String name,  String password) {
+    public User(String email, String password) {
         this.email = email;
-        this.name = name;
         this.password = password;
     }
 
     public User(UserDTO data) {
         this.email = data.getEmail();
-        this.name = data.getName();
         this.password = data.getPassword();
     }
 

@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/calculation")
+@RequestMapping("/exp")
 public class CalculatorController {
 
     private final CalculatorService calculatorService;
@@ -27,6 +27,7 @@ public class CalculatorController {
 
     @PostMapping
     public ResponseEntity<Object> postCalculation(@RequestBody ExpressionDTO data, Principal principal){
+        System.out.println("data: " + data.getExpression() + " " + data.getExpressionUserEmail());
         Optional<Expression> expression = calculatorService.calculate(data.getExpression(), data.getExpressionUserEmail());
 
         if (expression.isEmpty()){
