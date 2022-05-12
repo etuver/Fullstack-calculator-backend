@@ -104,10 +104,6 @@ public class CalculatorService {
         return false;
     }
 
-    public List<Expression> getExpressionByUserEmail(String email){
-        return expressionRepository.findAllByEspressionUser(email);
-    }
-
     public void deleteExpression(Long id){
         Optional<Expression> optionalExpression = expressionRepository.findById(id);
         if (optionalExpression.isEmpty()){
