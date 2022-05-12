@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.Duration;
 import java.util.*;
@@ -36,7 +37,7 @@ public class AuthorizationController {
     private final AuthorizationService authorizationService;
 
 
-    private final String TOKEN_KEY = "jpw8nt-k7a76t-bw4bzk-ies8vg-yeyeye-ye";
+    private final String TOKEN_KEY = "N0NuokWWb5XjMP+V3XLfyLkaSArwxNm17VeAvv7+y4+Y/DmxBLenvwOPO404lfl6UfyyEGgQ02ETDEPRMwV/+Q==";
     private final long duration = Duration.ofHours(24).toMillis(); // Duration of the token
 
     @Autowired
@@ -66,7 +67,7 @@ public class AuthorizationController {
 
 
     public String generateToken(String userId) throws Exception {
-        Key key = Keys.hmacShaKeyFor(TOKEN_KEY.getBytes("UTF-8"));
+        Key key = Keys.hmacShaKeyFor(TOKEN_KEY.getBytes(StandardCharsets.UTF_8));
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
 
         Claims claims = Jwts.claims().setSubject(userId);
