@@ -40,31 +40,42 @@ public class CalculatorService {
 
 
     public String getResult(String expression){
+        String expression2 = expression;
         double n1 = 0;
         double n2 = 0;
         String operator = "x";
         String res = "";
-        if (expression.contains("-")){
+        boolean firstNegative = false;
+        if (String.valueOf(expression2.charAt(0)).equals("-")){
+            firstNegative = true;
+            expression2 = expression2.substring(1);
+        }
+
+        if (expression2.contains("-")){
             operator = "-";
-            String[] parts = expression.split("-");
+            String[] parts = expression2.split("-");
             n1 = Double.parseDouble(parts[0]);
             n2 = Double.parseDouble(parts[1]);
-        }else if (expression.contains("*")){
+        }else if (expression2.contains("*")){
             operator = "*";
-            String[] parts = expression.split("\\*");
+            String[] parts = expression2.split("\\*");
             n1 = Double.parseDouble(parts[0]);
             n2 = Double.parseDouble(parts[1]);
-        }else if (expression.contains("/")){
+        }else if (expression2.contains("/")){
             operator = "/";
-            String[] parts = expression.split("/");
+            String[] parts = expression2.split("/");
             n1 = Double.parseDouble(parts[0]);
             n2 = Double.parseDouble(parts[1]);
-        }else if (expression.contains("+")){
+        }else if (expression2.contains("+")){
             operator = "+";
-            String[] parts = expression.split("\\+");
+            String[] parts = expression2.split("\\+");
             n1 = Double.parseDouble(parts[0]);
             n2 = Double.parseDouble(parts[1]);
         }
+        if (firstNegative){
+            n1 = n1 * -1;
+        }
+
         System.out.println("n1: " +n1 + ", n2: "+n2 + ", operator: "+ operator);
 
         if (!checkOperator(operator)){ //checking operator
