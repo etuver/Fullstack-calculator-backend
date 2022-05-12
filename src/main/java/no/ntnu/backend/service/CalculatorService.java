@@ -9,12 +9,15 @@ import no.ntnu.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.StringTokenizer;
 
 @Service
 public class CalculatorService {
+
+    private final DecimalFormat df = new DecimalFormat("0.00000");
 
     private final ExpressionRepository expressionRepository;
 
@@ -83,17 +86,17 @@ public class CalculatorService {
         }else
         {
             if (operator.equals("+")){
-                res = String.valueOf(n1 + n2);
+                res = String.valueOf(df.format(n1 + n2));
             }
             else if (operator.equals("-")){
-                res = String.valueOf(n1 - n2);
+                res = String.valueOf(df.format(n1 - n2));
             }else if (operator.equals("*")){
-                res = String.valueOf(n1 * n2);
+                res = String.valueOf(df.format(n1 * n2));
             }else if (operator.equals("/")){
                 if (n2 == 0){
                     throw new IllegalArgumentException("Illegal expression: divie by zero");
                 }else {
-                    res = String.valueOf(n1 / n2);
+                    res = String.valueOf( df.format(n1 / n2));
                 }
             }else {
                 throw new IllegalArgumentException("Illegal expression: bad operator");
