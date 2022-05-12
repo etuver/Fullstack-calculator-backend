@@ -39,7 +39,6 @@ public class CalculatorController {
 
     @PostMapping("")
     public ResponseEntity<String> postCalculation(@RequestBody ExpressionDTO data, Principal principal){
-        System.out.println("data: " + data.getExpression() + " " + data.getExpressionUserEmail());
         if (data.getExpression().isBlank() || data.getExpressionUserEmail().isBlank()){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to calculate");
         }
@@ -57,11 +56,14 @@ public class CalculatorController {
         return ResponseEntity.ok(res);
     }
 
-    @GetMapping("/exp/{useremail}")
-    public ResponseEntity<Object> getCalculations(Principal principal){
-        List<ExpressionDTO> list = calculatorService.getExpressionByUserEmail(principal.getName()).stream()
-                .map(ExpressionDTO::new).collect(Collectors.toList());
-        return ResponseEntity.ok(list);
+    @GetMapping("/exp{email}")
+    public ResponseEntity<List<Expression>> getCalculations(@PathVariable String email){
+        System.out.println("Recieved get request for history");
+        Optional<List<Expression>> list = expressionRepository.findAllByEspressionUser(email);
+
+        return list.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().body(null));
+
+
     }
 
 }
@@ -84,3 +86,12 @@ public class CalculatorController {
         return ResponseEntity.ok(new ExpressionDTO(expression.get()));
     }
      */
+
+    /**
+     @GetMapping("/exp{email}")
+     public ResponseEntity<Object> getCalculations(Principal principal){
+     System.out.println("Recieved get request for history");
+     List<ExpressionDTO> list = calculatorService.getExpressionByUserEmail(principal.getName()).stream()
+     .map(ExpressionDTO::new).collect(Collectors.toList());
+     return ResponseEntity.ok(list);
+     }*/
