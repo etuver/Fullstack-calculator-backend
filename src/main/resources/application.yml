@@ -1,12 +1,6 @@
-spring:
-  data.rest.detection-strategy: annotated
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate.ddl-auto: update
-  datasource:
-    username: sa
-    password: passord
-    driverClassName: org.h2.Driver
-  h2.console:
-    enabled: true
-    path: /h2
+  spring.datasource.url=jdbc:mariadb://tuverudnet02.mysql.domeneshop.no
+  spring.datasource.username=tuverudnet02  
+  spring.datasource.password=4-4lyste-DI-ffff
+  spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+  spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB105Dialect
+  spring.jpa.hibernate.ddl-auto=create-drop

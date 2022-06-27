@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfiguration corsConfiguration() {
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("http://localhost:8080");
+        config.addAllowedOrigin("http://localhost:8080");  //https://www.tuverud.net/
         config.addAllowedHeader("*");
         config.setAllowCredentials(true);
         List.of("GET", "POST", "PUT", "DELETE", "OPTIONS").forEach(config::addAllowedMethod);
