@@ -17,7 +17,7 @@ import java.util.StringTokenizer;
 @Service
 public class CalculatorService {
 
-    private final DecimalFormat df = new DecimalFormat("0.00000");
+    private final DecimalFormat df = new DecimalFormat("0.000");
 
     private final ExpressionRepository expressionRepository;
 
